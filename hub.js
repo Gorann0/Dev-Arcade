@@ -1,3 +1,4 @@
+// Forçar variáveis globais para o window
 window.currentInterval = null; 
 window.currentAnimationFrame = null; 
 window.gameActive = false;
@@ -25,30 +26,8 @@ const gameInstructions = {
     ]
 };
 
-// --- FUNÇÃO DE REINÍCIO SUAVE (Mantém Tela Cheia) ---
-function resetCurrentGame(gameType) {
-    window.gameActive = false;
-    
-    // Limpa loops ativos
-    if (window.currentInterval) clearInterval(window.currentInterval);
-    if (window.currentAnimationFrame) cancelAnimationFrame(window.currentAnimationFrame);
-
-    const oldCanvas = document.getElementById('mainCanvas');
-    const domContainer = document.getElementById('dom-game-container');
-
-    // Reseta o Canvas para limpar EventListeners de teclado/mouse
-    const newCanvas = oldCanvas.cloneNode(true);
-    oldCanvas.parentNode.replaceChild(newCanvas, oldCanvas);
-
-    // Pequeno delay para garantir que o motor anterior parou
-    setTimeout(() => {
-        window.gameActive = true;
-        launchGameLogic(gameType, newCanvas, domContainer);
-    }, 50);
-}
-
-// --- FUNÇÃO DE CARGA INICIAL (Troca de Jogo) ---
-function loadGame(gameType) {
+// Tornar a função global explicitamente
+window.loadGame = function(gameType) {
     window.gameActive = false; 
 
     if (window.currentInterval) clearInterval(window.currentInterval);
@@ -60,7 +39,6 @@ function loadGame(gameType) {
 
     if (placeholder) placeholder.style.display = "none";
 
-    // Reseta o Canvas e UI
     const newCanvas = oldCanvas.cloneNode(true);
     oldCanvas.parentNode.replaceChild(newCanvas, oldCanvas);
     
@@ -75,9 +53,25 @@ function loadGame(gameType) {
         window.gameActive = true; 
         launchGameLogic(gameType, newCanvas, domContainer);
     }, 50);
-}
+};
 
-// Auxiliar para decidir qual init chamar
+// Tornar a função global explicitamente
+window.resetCurrentGame = function(gameType) {
+    window.gameActive = false;
+    if (window.currentInterval) clearInterval(window.currentInterval);
+    if (window.currentAnimationFrame) cancelAnimationFrame(window.currentAnimationFrame);
+
+    const oldCanvas = document.getElementById('mainCanvas');
+    const domContainer = document.getElementById('dom-game-container');
+    const newCanvas = oldCanvas.cloneNode(true);
+    oldCanvas.parentNode.replaceChild(newCanvas, oldCanvas);
+
+    setTimeout(() => {
+        window.gameActive = true;
+        launchGameLogic(gameType, newCanvas, domContainer);
+    }, 50);
+};
+
 function launchGameLogic(gameType, canvas, domContainer) {
     if (gameType === 'snake') {
         canvas.style.display = "block";
@@ -93,7 +87,8 @@ function launchGameLogic(gameType, canvas, domContainer) {
         initFlappy(canvas);
     } else if (gameType === 'tetris') {
         canvas.style.display = "block";
-        canvas.width = 300; canvas.height = 600;
+        canvas.width = (10 + 6) * 24; // Ajustado para o seu novo Tetris
+        canvas.height = 20 * 24;
         initTetris(canvas);
     } else if (gameType === 'memory') {
         domContainer.style.display = "grid";
@@ -123,12 +118,13 @@ function loadStyle(gameName) {
     const link = document.createElement('link');
     link.id = 'dynamic-game-style';
     link.rel = 'stylesheet';
-    link.href = `Games/${gameName}.css`;
+    // ATENÇÃO: 'G' maiúsculo para o GitHub Pages
+    link.href = `Games/${gameName}.css`; 
     document.head.appendChild(link);
 }
 
-// Persistência de Recordes
-function saveHighScore(gameName, score) {
+// Persistência de Recordes (Globais)
+window.saveHighScore = function(gameName, score) {
     const key = `highScore_${gameName}`;
     const savedScore = localStorage.getItem(key) || 0;
     if (score > savedScore) {
@@ -136,27 +132,24 @@ function saveHighScore(gameName, score) {
         return true;
     }
     return false;
-}
+};
 
-function getHighScore(gameName) {
+window.getHighScore = function(gameName) {
     return localStorage.getItem(`highScore_${gameName}`) || 0;
-}
+};
 
-// Tela Cheia
-function toggleFullScreen() {
+window.toggleFullScreen = function() {
     const elem = document.getElementById("game-viewport");
     if (!document.fullscreenElement) {
         elem.requestFullscreen?.() || elem.webkitRequestFullscreen?.() || elem.msRequestFullscreen?.();
     } else {
         document.exitFullscreen?.();
     }
-}
+};
 
-// Bloqueio de Scroll
 window.addEventListener("keydown", function(e) {
     const keysToBlock = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "];
     if (keysToBlock.includes(e.key)) {
         e.preventDefault();
     }
-
 }, false);
