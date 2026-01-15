@@ -1,0 +1,27 @@
+#tetris-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+#tetris-canvas {
+    border: 4px solid #334155;
+    background: radial-gradient(circle, #1e293b 0%, #0f172a 100%); /* Fundo com profundidade */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 50px rgba(0,0,0,0.5);
+}
+
+.tetris-info {
+    margin-top: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+}
+
+
+#mainCanvas {
+    border: 4px solid #475569; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); 
+    margin: 0 auto; 
+    display: block;
+    background-color: #0f172a; 
+}

@@ -1,0 +1,36 @@
+/* Container do Jogo */
+#mainCanvas {
+    border: 4px solid #333;
+    border-radius: 8px;
+    background-color: #1a1a2e; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin: 20px auto;
+    display: block;
+}
+
+/* Efeito de brilho quando o jogo está ativo */
+#game-viewport {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #2e1065 0%, #000000 100%);
+    min-height: 500px;
+    transition: background 0.5s ease;
+}
+
+.breakout-instruction {
+    color: white;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}

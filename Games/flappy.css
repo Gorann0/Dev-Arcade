@@ -1,0 +1,8 @@
+/* No games/flappy.css */
+#mainCanvas {
+    background-color: #70c5ce;
+    border: 2px solid #000;
+    /* Removemos larguras fixas daqui para o container mandar */
+    height: 100%; 
+    width: auto;
+}

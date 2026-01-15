@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevArcade Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+
+    <div id="ui-container">
+        <header>
+            <h1>🕹️ DEV-ARCADE</h1>
+            <nav id="menu">
+                <button class="btn-game" onclick="loadGame('snake')">Snake Pro</button>
+                <button class="btn-game" onclick="loadGame('flappy')">Flappy Bird</button>
+                <button class="btn-game" onclick="loadGame('memory')">Memory Game</button>
+                <button class="btn-game" onclick="loadGame('tetris')">Tetris</button>
+                <button class="btn-game" onclick="loadGame('breakout')">Breakout</button>
+            </nav>
+            <div id="action-bar">
+                <button class="btn-game btn-fullscreen" onclick="toggleFullScreen()">
+                    MAXIMIZE EXPERIENCE [F11]
+                </button>
+            </div>
+        </header>
+
+        <main id="game-viewport">
+            <div class="scanlines"></div>
+            
+            <canvas id="mainCanvas"></canvas>
+            <div id="dom-game-container"></div>
+            
+            <div id="placeholder-text">Selecione um jogo para começar!</div>
+        </main>
+    </div>
+
+    <div id="instructions-container"></div>
+        
+
+
+    <script src="games/snake.js"></script>
+    <script src="games/flappy.js"></script>
+    <script src="games/memory.js"></script>
+    <script src="games/tetris.js"></script>
+    <script src="games/breakout.js"></script>
+    <script src="hub.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <p>SYSTEM READY // DESIGNED BY GORAN HENRIQUE</p>
+            <p class="copyright">© 2026 RETRO ARCADE HUB - ALL RIGHTS RESERVED</p>
+        </div>
+    </footer>
+</body>
+</html>

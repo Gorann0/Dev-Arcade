@@ -1,0 +1,241 @@
+/* Reset básico e Fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Orbitron', sans-serif; /* Orbitron é ótima para este tema se estiver disponível */
+}
+
+body {
+    background-color: #2d142c; /* Vinho Profundo */
+    color: #f67280;           /* Rosa Coral */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    /* Efeito de grade retrô no fundo (opcional, mas icônico) */
+    background: linear-gradient(180deg, #2d142c 0%, #510a32 50%, #2d142c 100%);
+}
+
+/* Header e Menu */
+header {
+    width: 100%;
+    padding: 3rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    color: #eeeeee;
+    /* Gradiente de texto e sombra dupla (Estilo Anos 80) */
+    text-shadow: 
+        3px 3px 0px #ee4540, 
+        6px 6px 0px #510a32;
+    letter-spacing: 5px;
+}
+
+#menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Botões Retro-Vapor */
+.btn-game {
+    background: #ee4540;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); /* Botão inclinado estilo arcade */
+    transition: all 0.3s ease;
+}
+
+.btn-game:hover {
+    background: #f67280;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #f67280;
+}
+
+/* Viewport do Jogo (A "Tela de Arcade") */
+#game-viewport {
+    width: 600px;
+    height: 500px;
+    background-color: #000;
+    border: 8px double #c06c84;
+    border-radius: 5px;
+    position: relative; /* Pai relativo para as camadas filhas */
+    margin: 20px auto;
+    box-shadow: 0 0 50px rgba(238, 69, 64, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Texto de Placeholder */
+#placeholder-text {
+    position: absolute;
+    z-index: 5;
+    color: #f67280;
+    font-family: monospace;
+    text-transform: uppercase;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Canvas */
+canvas {
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 1; /* Fica atrás das scanlines */
+}
+
+/* Responsividade */
+@media (max-width: 650px) {
+    #game-viewport {
+        width: 95vw;
+        height: 50vh;
+    }
+}
+
+footer {
+    width: 100%;
+    margin-top: 50px; /* Espaço após o jogo */
+    padding: 30px 0;
+    border-top: 1px solid rgba(246, 114, 128, 0.2);
+    background: linear-gradient(0deg, rgba(81, 10, 50, 0.5) 0%, transparent 100%);
+    text-align: center;
+}
+
+.footer-content p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    color: #f67280;
+    text-shadow: 0 0 5px rgba(246, 114, 128, 0.5);
+    margin-bottom: 10px;
+}
+
+.footer-content .copyright {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    color: #eeeeee;
+}
+
+#instructions-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.instr-card {
+    background: rgba(81, 10, 50, 0.4);
+    border-left: 5px solid #ee4540;
+    padding: 20px;
+    min-width: 200px;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%); /* Trapézio sutil */
+    transition: transform 0.3s ease;
+}
+
+.instr-card:hover {
+    transform: translateY(-5px);
+    background: rgba(81, 10, 50, 0.6);
+}
+
+.instr-card h3 {
+    font-size: 1rem;
+    color: #eeeeee;
+    margin-bottom: 15px;
+    text-align: center;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(238, 69, 64, 0.3);
+}
+
+.instr-card ul {
+    list-style: none;
+}
+
+.instr-card li {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: #f67280;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.instr-card span {
+    background: #ee4540;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+/* Cores específicas para os power-ups no menu */
+.pwr-wide { background: #00FF00 !important; color: black !important; }
+.pwr-multi { background: #00FFFF !important; color: black !important; }
+
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.1) 50%
+    ), linear-gradient(
+        90deg, 
+        rgba(255, 0, 0, 0.02), 
+        rgba(0, 255, 0, 0.01), 
+        rgba(0, 0, 255, 0.02)
+    );
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none; /* Importante: permite clicar através da camada */
+    z-index: 10;
+}
+
+.scanlines {
+    pointer-events: none; /* Garante que você consiga clicar no jogo */
+    z-index: 10; /* Sempre no topo de tudo */
+}
+
+#action-bar {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-fullscreen {
+    background: #510a32 !important;
+    border: 1px solid #f67280 !important;
+    font-size: 0.7rem !important;
+    clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%) !important;
+}
+
+/* Estilo para quando estiver em tela cheia */
+#game-viewport:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
