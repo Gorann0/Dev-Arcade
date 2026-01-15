@@ -123,7 +123,7 @@ function loadStyle(gameName) {
     const link = document.createElement('link');
     link.id = 'dynamic-game-style';
     link.rel = 'stylesheet';
-    link.href = `games/${gameName}.css`;
+    link.href = `Games/${gameName}.css`;
     document.head.appendChild(link);
 }
 
@@ -158,4 +158,5 @@ window.addEventListener("keydown", function(e) {
     if (keysToBlock.includes(e.key)) {
         e.preventDefault();
     }
+
 }, false);
