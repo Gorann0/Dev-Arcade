@@ -48,7 +48,7 @@ function initSnake(canvas) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         direction = nextDirection;
         
-        let currentLevel = Math.min(Math.floor(score / 10), levels.length - 1);
+        let currentLevel = Math.min(Math.floor(score / 3), levels.length - 1);
         let colors = levels[currentLevel];
 
         ctx.fillStyle = colors.bg;
@@ -58,9 +58,9 @@ function initSnake(canvas) {
         ctx.fillStyle = "white";
         ctx.font = "16px Arial";
         ctx.textAlign = "left";
-        ctx.fillText("Score: " + score, 10, 20);
+        ctx.fillText("Score: " + score, 3, 6);
         ctx.fillStyle = "#38bdf8"; 
-        ctx.fillText("Best: " + getHighScore('snake'), 10, 40);
+        ctx.fillText("Best: " + getHighScore('snake'), 3, 12);
 
         // Cobra
         for (let i = 0; i < snake.length; i++) {
@@ -169,4 +169,5 @@ function initSnake(canvas) {
     }
 
     requestAnimationFrame(draw);
+
 }
