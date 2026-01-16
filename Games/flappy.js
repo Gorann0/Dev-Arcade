@@ -24,7 +24,7 @@ function initFlappy(canvas) {
     }
 
     function createPipe() {
-        let currentLevel = Math.floor(score / 5); 
+        let currentLevel = Math.floor(score / 15); 
         let dynamicGap = Math.max(130 - (currentLevel * 10), 90);
         let pipeTopHeight = Math.random() * (canvas.height / 2.5) + 50;
         pipes.push({ x: canvas.width, top: pipeTopHeight, bottom: canvas.height - pipeTopHeight - dynamicGap, passed: false });
@@ -32,7 +32,7 @@ function initFlappy(canvas) {
 
     function update() {
         if (!gameStarted || isGameOver) return;
-        let currentLevel = Math.floor(score / 5);
+        let currentLevel = Math.floor(score / 15);
         let speed = 2.5 + (currentLevel * 0.3);
         let spawnRate = Math.max(85 - (currentLevel * 5), 55);
 
@@ -93,7 +93,7 @@ function initFlappy(canvas) {
         update();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        let currentLevel = Math.floor(score / 5);
+        let currentLevel = Math.floor(score / 15);
         let themeIdx = Math.min(currentLevel, worlds.length - 1);
         let theme = worlds[themeIdx];
 
@@ -119,7 +119,7 @@ function initFlappy(canvas) {
         
         // Olho do Pássaro (Preto se score >= 75)
         ctx.shadowBlur = 0;
-        if (currentLevel === 3 || score >= 25) {
+        if (currentLevel === 3 || score >= 75) {
             ctx.fillStyle = "black";
         } else {
             ctx.fillStyle = "white";
@@ -154,3 +154,4 @@ function initFlappy(canvas) {
     gameLoop();
 
 }
+
